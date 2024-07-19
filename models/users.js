@@ -1,6 +1,8 @@
+const jwt = require('jsonwebtoken')
 const mongoose = require('mongoose')
 const Joi = require('joi')
 
+jwtPrivateKey = "jwtPrivateKey"
 const userSchema = new mongoose.Schema({
     firstName: {
         type: String,
@@ -47,6 +49,11 @@ const registerSchema = {
     nameOnCard: Joi.string()
 }
 
+// Generate an auth token for a user
+userSchema.methods.generateAuthToken = function () {
+    const token = jwt.sign({_id: this._id}, jwtPrivateKey)
+    return token
+}
 
 function validateUser(user) {
     const schema = Joi.object(registerSchema)

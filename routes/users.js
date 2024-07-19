@@ -12,7 +12,6 @@ router.get(':id', (req, res) => {
 
 router.post('', async (req, res) => {
     console.log("Request Received")
-    console.log(req.body)
     const isValid = validateUser(req.body)
     if (!isValid) {
         return res.status(400).send("Invalid User")
@@ -24,8 +23,15 @@ router.post('', async (req, res) => {
         return res.status(400).send("User already exists")
     }
     const newUser = new User(req.body)
-    const result = await newUser.save()
-    return res.send(result)
+    try {
+        const token = newUser.generateAuthToken()
+        console.log(token)
+        const result = await newUser.save()
+        return res.header('x-auth-token', token).send(result)
+    } 
+    catch (err) {
+        return res.status(400).send("Error" + err)
+    }
 })
 
 module.exports = router
