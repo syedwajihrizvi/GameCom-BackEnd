@@ -13,7 +13,7 @@ if (!config.get("jwtPrivateKey") || !config.get("awsKey")) {
     console.log("Mandatory keys were not defined")
     process.exit(1)
 }
-mongoose.connect("mongodb://localhost/gamecom")
+mongoose.connect(config.get('db'))
         .then(res => console.log("Successfully connected to database"))
         .catch(err => console.log())
 

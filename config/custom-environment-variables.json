@@ -1,4 +1,5 @@
 {
     "jwtPrivateKey": "gamecom_jwtPrivateKey",
-    "awsKey": "gamecom_awsKey"
+    "awsKey": "gamecom_awsKey",
+    "db": "gamecom_db"
 }

@@ -1,4 +1,5 @@
 {
     "jwtPrivateKey": "",
-    "awsKey": ""
+    "awsKey": "",
+    "db": "mongodb://localhost/gamecom"
 }
