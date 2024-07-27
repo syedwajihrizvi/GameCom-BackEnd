@@ -15,7 +15,7 @@ if (!config.get("jwtPrivateKey") || !config.get("awsKey")) {
 }
 mongoose.connect(config.get('db'))
         .then(res => console.log("Successfully connected to database"))
-        .catch(err => console.log())
+        .catch(err => console.log(err))
 
 app.use(express.json())
 app.use(cors())
@@ -25,6 +25,7 @@ app.use('/gamecom/api/users/', users);
 app.use('/gamecom/login/', login)
 app.use('/gamecom/data', data)
 
-app.listen(3000, () => {
-    console.log("Listening on Port 3000")
+const port = process.env.PORT || 3000
+app.listen(port, () => {
+    console.log(`Listening on ${port}`)
 })
