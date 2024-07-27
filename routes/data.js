@@ -1,9 +1,10 @@
 const axios = require('axios')
+const config = require('config')
 const express = require('express')
 const router = express.Router()
 
 const api = "https://bipn930cal.execute-api.us-west-2.amazonaws.com/production/v4"
-const awsKey = "lnmKRjVyqu10vw1MoeaQf6iAIKLDUJlC18ik1xVq"
+const awsKey = config.get("awsKey")
 
 const apiClient = axios.create({baseURL: api, headers: {'x-api-key': awsKey}})
 

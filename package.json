@@ -4,14 +4,21 @@
   "description": "To handle users",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "engines": {
+    "node": "20.13.1"
   },
   "author": "Syed Rizvi",
   "license": "ISC",
   "dependencies": {
     "axios": "^1.7.2",
+    "compression": "^1.7.4",
+    "config": "^3.3.12",
     "cors": "^2.8.5",
     "express": "^4.19.2",
+    "helmet": "^7.1.0",
     "joi": "^17.13.3",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.5.1",
