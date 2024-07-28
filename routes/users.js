@@ -29,7 +29,6 @@ router.post('', async (req, res) => {
     // Does the user already exist
     const user = await User.findOne({email: req.body.email})
     if (user) {
-        console.log("User with given information already exists")
         return res.status(400).send("User already exists")
     }
     const newUser = new User(req.body)
@@ -59,6 +58,10 @@ router.put('/:id', async (req, res) => {
                 const newGames = user[propertyName].filter(gameId => !req.body[property].includes(gameId))
                 user[propertyName] = newGames
             } else {
+                // Check if trying to add pre-existing game
+                const commonElements = _.intersection(user[property], req.body[property])
+                if (commonElements.length > 0)
+                    return res.status(400).send("Attempted to add pre existing game")
                 user[property] = [...user[property], ...req.body[property]]
             }
         } else {
