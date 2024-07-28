@@ -43,6 +43,7 @@ router.post('', async (req, res) => {
 })
 
 router.put('/:id', async (req, res) => {
+    console.log(req.params.id)
     const user = await User.findById(req.params.id)
     if (!user) {
         return res.status(404).send("Invalid User")
