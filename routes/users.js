@@ -10,15 +10,19 @@ router.get('', (req, res) => {
 
 router.get('/me', authorization, async (req, res) => {
     const userID = req.user._id
-    const user = await User.findById(userID)
-    if (!user) {
-        return res.status(401).send("Invalid JWT Token")
+    try {
+        const user = await User.findById(userID)
+        if (!user) {
+            return res.status(401).send("Invalid JWT Token")
+        }
+        return res.send({
+            id: user._id, favoriteGames: user.favoriteGames, 
+            email: user.email, password: user.password, plan: user.selectedPlan, 
+            cardInfo: {cardNumber: user.cardNumber.substring(12), expiryDate: user.expirationDate},
+            firstName: user.firstName[0]})       
+    } catch (error) {
+        return res.status(501).send("An Internal Server error occurred")
     }
-    return res.send({
-        id: user._id, favoriteGames: user.favoriteGames, 
-        email: user.email, password: user.password, plan: user.selectedPlan, 
-        cardInfo: {cardNumber: user.cardNumber.substring(12), expiryDate: user.expirationDate},
-        firstName: user.firstName[0]})
 })
 
 router.post('', async (req, res) => {

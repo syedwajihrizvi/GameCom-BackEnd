@@ -13,59 +13,83 @@ router.post('/games', async (req, res) => {
     if (!query)
         return res.status(400).send("Invalid Request: No query found for games")
     // Send the request to the IDGB Server
-    const result = await apiClient.post('/games', query)
-    if (!result)
-        return res.status(400).send("Invalid game response received")
-    return res.send(result.data)
+    try {
+        const result = await apiClient.post('/games', query)
+        if (!result)
+            return res.status(400).send("Invalid game response received")
+        return res.send(result.data)       
+    } catch (error) {
+        return res.status(501).send("An Internal server error occured")
+    }
 })
 
 router.post('/gameModes', async (req, res) => {
     const {query} = req.body
     if (!query)
         return res.status(400).send("Invalid Request: No query found for gameModes")
-    const result = await apiClient.post('/game_modes', query)
-    if (!result)
-        return res.status(400).send("Invalid game response received")
-    return res.send(result.data)
+    try {
+        const result = await apiClient.post('/game_modes', query)
+        if (!result)
+            return res.status(400).send("Invalid game response received")
+        return res.send(result.data)       
+    } catch (error) {
+        return res.status(501).send("An Internal server error occured")
+    }
 })
 
 router.post('/involved_companies', async (req, res) => {
     const {query} = req.body
     if (!query)
         return res.status(400).send("Invalid Request: No query found for companies")
-    const result = await apiClient.post('/involved_companies', query)
-    if (!result)
-        return res.status(400).send("Invalid company response received")
-    return res.send(result.data)
+    try {
+        const result = await apiClient.post('/involved_companies', query)
+        if (!result)
+            return res.status(400).send("Invalid company response received")
+        return res.send(result.data)       
+    } catch (error) {
+        return res.status(501).send("An Internal server error occured")
+    }
 })
 
 router.post('/genres', async (req, res) => {
     const {query} = req.body
     if (!query)
         return res.status(400).send("Invalid Reuest: No query found for genres")
-    const result = await apiClient.post('/genres', query)
-    if (!result)
-        return res.status(400).send("Invalid genre response received")
-    return res.send(result.data)
+    try {
+        const result = await apiClient.post('/genres', query)
+        if (!result)
+            return res.status(400).send("Invalid genre response received")
+        return res.send(result.data)       
+    } catch (error) {
+        return res.status(501).send("An Internal server error occured")
+    }
 })
 
 router.post('/themes', async (req, res) => {
     const {query} = req.body
     if (!query)
         return res.status(400).send("Invalid Request: No query found for themes")
-    const result = await apiClient.post('/themes', query)
-    if (!result)
-        return res.status(400).send("Invalid themes response received")
-    return res.send(result.data)    
+    try {
+        const result = await apiClient.post('/themes', query)
+        if (!result)
+            return res.status(400).send("Invalid themes response received")
+        return res.send(result.data)         
+    } catch (error) {
+        return res.status(501).send("An Internal server error occured")
+    }   
 })
 
 router.post('/platforms', async (req, res) => {
     const {query} = req.body
     if (!query)
         return res.status(400).send("Invalid Request: No query found for platforms")
-    const result = await apiClient.post('/platforms', query)
-    if (!result)
-        return res.status(400).send("Invalid platforms response received")
-    return res.send(result.data)    
+    try {
+        const result = await apiClient.post('/platforms', query)
+        if (!result)
+            return res.status(400).send("Invalid platforms response received")
+        return res.send(result.data)        
+    } catch (error) {
+        return res.status(501).send("An Internal server error occured")
+    }   
 })
 module.exports = router
