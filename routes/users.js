@@ -47,12 +47,12 @@ router.post('', async (req, res) => {
 })
 
 router.put('/:id', async (req, res) => {
-    console.log(req.params.id)
     const user = await User.findById(req.params.id)
     if (!user) {
         return res.status(404).send("Invalid User")
     }
     // Update the neccessary values
+    const updatedUser = {...user}
     for (let property in req.body) {
         // if the property is the favoriteGames, we need to add to the current games
         if (property.includes("favoriteGames")) {
@@ -71,13 +71,15 @@ router.put('/:id', async (req, res) => {
             }
         } else {
             user[property] = req.body[property]
+            console.log(user[property])
         }
     }
+    console.log(user)
     // Validate the schema using Joi
     const {error} = validateUser(_.pick(user, ['email', 'firstName', 'lastName', 'password', 'cardNumber', 'expirationDate', 'cvv', 'nameOnCard', 'selectedPlan']))
     if (error) {
         console.log(error.details[0])
-        return res.status(400).send(error.details)
+        return res.status(400).send(error.details[0])
     }
     try {
         const result = await user.save()
