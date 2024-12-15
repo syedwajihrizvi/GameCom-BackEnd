@@ -1,3 +1,4 @@
+const config = require('config')
 const jwt = require('jsonwebtoken')
 
 function authorization(req, res, next) {
@@ -7,7 +8,7 @@ function authorization(req, res, next) {
         return res.status(401).send("JWT Token was not detected in header")
     }
     try {
-        const valid = jwt.verify(jwtToken, "jwtPrivateKey")
+        const valid = jwt.verify(jwtToken, config.get('jwtPrivateKey'))
         req.user = valid
         next()
     } catch (error) {

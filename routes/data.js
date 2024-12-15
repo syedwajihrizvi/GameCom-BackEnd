@@ -54,7 +54,7 @@ router.post('/involved_companies', async (req, res) => {
 router.post('/genres', async (req, res) => {
     const {query} = req.body
     if (!query)
-        return res.status(400).send("Invalid Reuest: No query found for genres")
+        return res.status(400).send("Invalid Request: No query found for genres")
     try {
         const result = await apiClient.post('/genres', query)
         if (!result)
